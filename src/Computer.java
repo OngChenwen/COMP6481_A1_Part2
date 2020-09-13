@@ -11,4 +11,44 @@ public class Computer {
         this.price = itemPrice;
     }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setSN(long SN) {
+        this.SN = SN;
+    }
+
+    public long getSN() {
+        return SN;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String toString() {
+        return "Computer:" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", SN=" + SN +
+                ", price=" + price +
+                '}';
+    }
 }
