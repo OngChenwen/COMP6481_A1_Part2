@@ -28,6 +28,7 @@ public class ComputerStore {
         displayMenu();
 
         while (true){
+            System.out.println("Please enter option number: ");
             int choice = scan.nextInt();
 
             if(choice == 5){
@@ -49,15 +50,23 @@ public class ComputerStore {
                             // add computers
                             System.out.println("Please enter how many computers you wanna add : ");
                             int numOfComputer = scan.nextInt();
+                            if(numOfComputer > SIZE){
+                                System.out.println("Space unavailable !!");
+
+                            }else {
+
                                 for(int k =0; k< numOfComputer; k++){
                                     addComputer(); }
 
+                            }
                             displayMenu();
                             continue;
                         }
 
                         if(counterForPassword== 3){
-                            System.out.println("Password entered limited");
+                            System.out.println("**************************");
+                            System.out.println("Password entered limited!!");
+                            System.out.println("                          ");
                             displayMenu();
                             continue;
                         }
@@ -65,8 +74,10 @@ public class ComputerStore {
 
                 } break;
 
-                case 2:modifyComputer(); break;
-                case 3:DisplayCompBySpecifiedBrand(); break;
+                case 2:{modifyComputer(); }break;
+                case 3:{
+                    DisplayCompBySpecifiedBrand();
+                } break;
                 case 4:DisplayCompByPrice(); break;
                 default:
                     System.out.println("Error");
@@ -80,7 +91,7 @@ public class ComputerStore {
 
     public void addComputer() {
     if(counter < SIZE){
-        System.out.println("Reminding Space : " + counter);
+        System.out.println("Reminding Space : " + (SIZE -counter));
         Scanner input = new Scanner(System.in);
 
         System.out.println("----------------------");
@@ -110,12 +121,47 @@ public class ComputerStore {
     }
 
     public void DisplayCompBySpecifiedBrand() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter the brand name: ");
+        String name = scan.next();
 
+        int id = findComputersBy(name);
+        for(int i = 0; i < counter; i++) {
+            if (id > -1) {
+                System.out.println("**********************");
+                System.out.println("Computer " + (i+1) + " information: ");
+                System.out.println("Brand: " + computerList[id].getBrand());
+                System.out.println("Model: " + computerList[id].getModel());
+                System.out.println("Serial Number: " + computerList[id].getSN());
+                System.out.println("Price: " + computerList[id].getPrice());
+            }
+
+        }
+
+
+    }
+
+    public int findComputersBy(String brandName){
+        int id = -1;
+        for(int i = 0; i < counter ; i++){
+            if(computerList[i].getBrand().equals(brandName)){
+                id = i;
+                break;
+            }else if(i<counter){
+                continue;
+            }else {
+                System.out.println("Not Found");
+                break;
+            }
+        }
+
+        return id;
     }
 
     public void DisplayCompByPrice(){
 
     }
+
 
 
     public static void main(String[] args) {
