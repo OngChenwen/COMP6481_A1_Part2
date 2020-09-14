@@ -21,6 +21,8 @@ public class ComputerStore {
 
     public ComputerStore(){
         Scanner scan = new Scanner(System.in);
+        int times = 3;
+        int counterForPassword = 0;
 
         System.out.println("**** Welcome ****");
         displayMenu();
@@ -34,21 +36,39 @@ public class ComputerStore {
             }
 
             switch (choice){
-                case 1:{
-                    System.out.println("Please enter password");
-                    String keyPassword = scan.next();
-                    if(keyPassword.equals(password)){
-                        addComputer();
-                    }
-                    }
-                case 2:modifyComputer();
-                case 3:DisplayCompBySpecifiedBrand();
-                case 4:DisplayCompByPrice();
+                case 1: {
+                    for(int i = 0; i<times; i++){
+                        System.out.println("Please enter password");
+                        String keyPassword = scan.next();
+                        counterForPassword++;
+                        if(keyPassword.equals(password)){
+                            i=3;
+                            addComputer();
+                            displayMenu();
+                            continue;
+                        }
 
+                        if(counterForPassword== 3){
+                            System.out.println("Password entered limited");
+                            displayMenu();
+                            continue;
+                        }
+                    }
+
+                } break;
+
+                case 2:modifyComputer(); break;
+                case 3:DisplayCompBySpecifiedBrand(); break;
+                case 4:DisplayCompByPrice(); break;
+                default:
+                    System.out.println("Error");
+                    displayMenu();
+                    continue;
             }
         }
 
     }
+
 
     public void addComputer() {
     if(counter < SIZE){
@@ -70,6 +90,8 @@ public class ComputerStore {
             counter++;
 
             System.out.println("New computer Added");
+
+
         }
     }
 
