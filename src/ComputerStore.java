@@ -37,13 +37,21 @@ public class ComputerStore {
 
             switch (choice){
                 case 1: {
+
+
                     for(int i = 0; i<times; i++){
-                        System.out.println("Please enter password");
+                        System.out.println("Please enter password: ");
                         String keyPassword = scan.next();
+
                         counterForPassword++;
                         if(keyPassword.equals(password)){
                             i=3;
-                            addComputer();
+                            // add computers
+                            System.out.println("Please enter how many computers you wanna add : ");
+                            int numOfComputer = scan.nextInt();
+                                for(int k =0; k< numOfComputer; k++){
+                                    addComputer(); }
+
                             displayMenu();
                             continue;
                         }
