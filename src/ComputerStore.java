@@ -75,10 +75,15 @@ public class ComputerStore {
                 } break;
 
                 case 2:{modifyComputer(); }break;
+
                 case 3:{
                     DisplayCompBySpecifiedBrand();
                 } break;
-                case 4:DisplayCompByPrice(); break;
+
+                case 4:{
+                    DisplayCompByPrice();
+                } break;
+
                 default:
                     System.out.println("Error");
                     displayMenu();
@@ -159,7 +164,38 @@ public class ComputerStore {
     }
 
     public void DisplayCompByPrice(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter the price: ");
+        double inputPrice = scan.nextDouble();
 
+        int id = findCheaperThan(inputPrice);
+        for(int k= 0; k < counter; k++) {
+            if (id > -1) {
+                System.out.println("**********************");
+                System.out.println("Computer " + (k+1) + " information: ");
+                System.out.println("Brand: " + computerList[id].getBrand());
+                System.out.println("Model: " + computerList[id].getModel());
+                System.out.println("Serial Number: " + computerList[id].getSN());
+                System.out.println("Price: " + computerList[id].getPrice());
+            }
+
+        }
+    }
+
+    public int findCheaperThan(double price){
+        int id =-1;
+        for(int i = 0; i < counter ; i++){
+            if(computerList[i].getPrice() < price){
+                id = i;
+                break;
+            }else if(i<counter){
+                continue;
+            }else {
+                System.out.println("Not Found");
+                break;
+            }
+        }
+        return id;
     }
 
 
