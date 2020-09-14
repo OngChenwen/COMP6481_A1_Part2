@@ -13,6 +13,8 @@ public class Computer {
         counter++;
     }
 
+    public Computer(){}
+
     public void setBrand(String brand) {
         this.brand = brand;
     }

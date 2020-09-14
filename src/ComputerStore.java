@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ComputerStore {
 
-    final String password = "password";
+    final static String password = "password";
     Scanner input;
 
     public static void displayMenu(){
@@ -18,29 +18,42 @@ public class ComputerStore {
     }
 
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
+
         System.out.println("Please enter the maximum capacity of computers ");
-        int capacityOfComputer =  input.nextInt();
+        int capacityOfComputer = input.nextInt();
 
         // Array of Computers
         Computer[] inventory = new Computer[capacityOfComputer];
 
-        switch (input.nextInt()){
-            case 1:{
-                System.out.println("Please enter your password!");
-                if(input.nextLine() == "password"){
-                    System.out.println("Pleas enter number of computers you want:");
-                    int inputNum = input.nextInt();
+        while (true) {
+            switch (input.nextInt()) {
+                case 1: {
+                    int remindingSpace = capacityOfComputer;
+                    System.out.println("Please enter your password!");
+                    if (input.nextLine() == password) {
+                        System.out.println("Pleas enter number of computers you want:");
+                        int inputNum = input.nextInt();
+                        //check if it has enough space for input
+                        if(inputNum > capacityOfComputer){
+                            System.out.println("Error! Reminding space is : " + remindingSpace);
+                        }else {
+                            if(inputNum < remindingSpace){
+
+                            }
+                        }
+                    }
 
 
                 }
 
             }
         }
-
     }
-
-
-
-
 }
+
+
+
+
+
