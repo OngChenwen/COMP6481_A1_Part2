@@ -1,4 +1,3 @@
-import java.awt.print.Book;
 import java.util.Scanner;
 
 public class ComputerStore {
@@ -130,23 +129,13 @@ public class ComputerStore {
         System.out.println("Please enter the brand name: ");
         String name = scan.next();
 
-        int id = findComputersBy(name);
-        for(int i = 0; i < counter; i++) {
-            if (id > -1) {
-                System.out.println("**********************");
-                System.out.println("Computer " + (i+1) + " information: ");
-                System.out.println("Brand: " + computerList[id].getBrand());
-                System.out.println("Model: " + computerList[id].getModel());
-                System.out.println("Serial Number: " + computerList[id].getSN());
-                System.out.println("Price: " + computerList[id].getPrice());
-            }
-
-        }
+        int id = findComputersByBrand(name);
+        DisplaySearchingResult(id);
 
 
     }
 
-    public int findComputersBy(String brandName){
+    public int findComputersByBrand(String brandName){
         int id = -1;
         for(int i = 0; i < counter ; i++){
             if(computerList[i].getBrand().equals(brandName)){
@@ -169,6 +158,10 @@ public class ComputerStore {
         double inputPrice = scan.nextDouble();
 
         int id = findCheaperThan(inputPrice);
+        DisplaySearchingResult(id);
+    }
+
+    public void DisplaySearchingResult(int id) {
         for(int k= 0; k < counter; k++) {
             if (id > -1) {
                 System.out.println("**********************");
