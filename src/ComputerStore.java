@@ -129,68 +129,37 @@ public class ComputerStore {
         System.out.println("Please enter the brand name: ");
         String name = scan.next();
 
-        int id = findComputersByBrand(name);
-        DisplaySearchingResult(id);
-
-
-    }
-
-    public int findComputersByBrand(String brandName){
-        int id = -1;
-        for(int i = 0; i < counter ; i++){
-            if(computerList[i].getBrand().equals(brandName)){
-                id = i;
-                break;
-            }else if(i<counter){
-                continue;
-            }else {
-                System.out.println("Not Found");
-                break;
+        for(int i =0; i <counter ; i++){
+            if(computerList[i].getBrand().equals(name)){
+                displaySearchingResult(i);
             }
         }
 
-        return id;
+
     }
+
 
     public void DisplayCompByPrice(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter the price: ");
         double inputPrice = scan.nextDouble();
 
-        int id = findCheaperThan(inputPrice);
-        DisplaySearchingResult(id);
-    }
-
-    public void DisplaySearchingResult(int id) {
-        for(int k= 0; k < counter; k++) {
-            if (id > -1) {
-                System.out.println("**********************");
-                System.out.println("Computer " + (k+1) + " information: ");
-                System.out.println("Brand: " + computerList[id].getBrand());
-                System.out.println("Model: " + computerList[id].getModel());
-                System.out.println("Serial Number: " + computerList[id].getSN());
-                System.out.println("Price: " + computerList[id].getPrice());
-            }
-
-        }
-    }
-
-    public int findCheaperThan(double price){
-        int id =-1;
-        for(int i = 0; i < counter ; i++){
-            if(computerList[i].getPrice() < price){
-                id = i;
-                break;
-            }else if(i<counter){
-                continue;
-            }else {
-                System.out.println("Not Found");
-                break;
+        for(int i = 0; i<counter; i++){
+            if(computerList[i].getPrice() < inputPrice){
+                displaySearchingResult(i);
             }
         }
-        return id;
+
     }
 
+    public void displaySearchingResult(int i) {
+        System.out.println("**********************");
+        System.out.println("Computer " + (i+1) + " information: ");
+        System.out.println("Brand: " + computerList[i].getBrand());
+        System.out.println("Model: " + computerList[i].getModel());
+        System.out.println("Serial Number: " + computerList[i].getSN());
+        System.out.println("Price: " + computerList[i].getPrice());
+    }
 
 
     public static void main(String[] args) {
