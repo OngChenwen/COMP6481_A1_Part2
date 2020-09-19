@@ -6,6 +6,7 @@ public class ComputerStore {
     private static final int SIZE = 10;
     Computer[] computerList = new Computer[SIZE];
     int counter = 0;
+    int computerIndex;
 
     public static void displayMenu(){
         System.out.println("What do you want to do?");
@@ -65,7 +66,6 @@ public class ComputerStore {
                         if(counterForPassword== 3){
                             System.out.println("**************************");
                             System.out.println("Password entered limited!!");
-                            System.out.println("                          ");
                             displayMenu();
                             continue;
                         }
@@ -73,7 +73,52 @@ public class ComputerStore {
 
                 } break;
 
-                case 2:{modifyComputer(); }break;
+                case 2:{
+                    for(int i = 0; i<times; i++){
+                        System.out.println("Please enter password: ");
+                        String keyPassword = scan.next();
+
+                        counterForPassword++;
+                        if(keyPassword.equals(password)){
+                            i=3;
+                            // modify computer
+                            System.out.println("Please enter the computer number you want to modify : ");
+                            int computerIndex = scan.nextInt();
+                            while(computerList[computerIndex] == null){
+
+                                        System.out.println("   There is no Computer object at the specified index location");
+                                        System.out.println ("  Do you want to: ");
+                                        System.out.println ("  1.Enter another computer");
+                                        System.out.println ("  2.Go back to the main menu");
+                                        int choose = scan.nextInt();
+                                        if(choose == 1){
+
+                                            modifyComputer();
+                                        }
+                                        else if (choose == 2){
+                                            displayMenu();
+                                        }
+
+                            else {
+
+                                    modifyComputer();
+                                }
+                                displayMenu();
+                            }
+
+                            continue;
+                        }
+
+                        if(counterForPassword== 3){
+                            System.out.println("**************************");
+                            System.out.println("Password entered limited!!");
+                            System.out.println("                          ");
+                            displayMenu();
+                            continue;
+                        }
+                    }
+
+                }break;
 
                 case 3:{
                     DisplayCompBySpecifiedBrand();
@@ -121,6 +166,48 @@ public class ComputerStore {
 
 
     public void modifyComputer(){
+        Scanner scanModify = new Scanner(System.in);
+        System.out.println("**********************");
+        System.out.println("Computer " + (computerIndex) + " information: ");
+        System.out.println("Brand: " + computerList[computerIndex].getBrand());
+        System.out.println("Model: " + computerList[computerIndex].getModel());
+        System.out.println("Serial Number: " + computerList[computerIndex].getSN());
+        System.out.println("Price: " + computerList[computerIndex].getPrice());
+        System.out.println("What information would you like to change");
+        System.out.println("    1. brand");
+        System.out.println("    2. model");
+        System.out.println("    3. SN");
+        System.out.println("    4. price");
+        System.out.println("    5. Quit");
+        System.out.println("Enter your choice >");
+        int choose = scanModify.nextInt();
+        if (choose == 1){
+
+        }else{
+            System.out.println("Input invalid");
+        }
+        if (choose == 2){
+
+        }else{
+            System.out.println("Input invalid");
+        }
+        if (choose == 3){
+
+        }else{
+            System.out.println("Input invalid");
+        }
+        if (choose == 4){
+
+        }else{
+            System.out.println("Input invalid");
+        }
+        if (choose == 5){
+
+        }else{
+            System.out.println("Input invalid");
+        }
+
+
 
     }
 
@@ -137,6 +224,7 @@ public class ComputerStore {
 
 
     }
+
 
 
     public void DisplayCompByPrice(){
@@ -161,7 +249,10 @@ public class ComputerStore {
         System.out.println("Price: " + computerList[i].getPrice());
     }
 
+    public void modifyResult(int computerIndex){
 
+
+    }
     public static void main(String[] args) {
         new ComputerStore();
     }
