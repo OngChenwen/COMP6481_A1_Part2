@@ -6,6 +6,7 @@ public class ComputerStore {
     private static final int SIZE = 10;
     Computer[] computerList = new Computer[SIZE];
     int counter = 0;
+    int flagOfNonExits = 0;
 
     public static void displayMenu(){
         System.out.println("What do you want to do?");
@@ -73,7 +74,8 @@ public class ComputerStore {
 
                 } break;
 
-                case 2:{modifyComputer(); }break;
+                case 2:{modifyComputer();
+                }break;
 
                 case 3:{
                     DisplayCompBySpecifiedBrand();
@@ -120,7 +122,68 @@ public class ComputerStore {
 
 
 
-    public void modifyComputer(){
+    public void modifyComputer() {
+        Scanner scan = new Scanner(System.in);
+        int times = 3;
+        int counterForPassword = 0;
+        for (int i = 0; i < times; i++) {
+            System.out.println("Please enter password: ");
+            String keyPassword = scan.next();
+
+            counterForPassword++;
+            if (keyPassword.equals(password)) {
+                printOp2Menu();
+                System.out.println("Enter your choice");
+                int cmd = scan.nextInt();
+                //display information
+                displayCompInOption2(cmd);
+                if (flagOfNonExits ==1){
+                    System.out.println("Option 1 : Enter new computer" );
+                    System.out.println("Option 2 : Go back to main menu");
+
+                    int cmdNoExits = scan.nextInt();
+
+                    if(cmdNoExits ==1){
+                        System.out.println();
+                    }
+                }
+
+
+
+
+                // illegal password entering time reached
+                if (counterForPassword == 3) {
+                    System.out.println("**************************");
+                    System.out.println("Password entered limited!!");
+                    System.out.println("                          ");
+                    displayMenu();
+                    continue;
+                }
+
+            }
+        }
+    }
+
+    public void displayCompInOption2(int index){
+        if(computerList[index] != null){
+            flagOfNonExits = 1;
+            System.out.println("Error! Computer " + index + " does not exist!" );
+        }else {
+            System.out.println("Computer #"+ index);
+            System.out.println("Brand: " + computerList[index].getBrand());
+            System.out.println("Model: " + computerList[index].getModel());
+            System.out.println("SN:" + computerList[index].getSN());
+            System.out.println("Price: " + computerList[index].getPrice());
+        }
+    }
+    public void printOp2Menu(){
+        System.out.println("What information you want to change?");
+        System.out.print("1.Brand\n" +
+                "2.model\n" +
+                "3.SN\n" +
+                "4.price\n" +
+                "5.Quit"
+        );
 
     }
 
