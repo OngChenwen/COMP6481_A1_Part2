@@ -68,7 +68,6 @@ public class ComputerStore {
                             System.out.println("Password entered limited!!");
                             System.out.println("                          ");
                             displayMenu();
-                            continue;
                         }
                     }
 
@@ -88,7 +87,6 @@ public class ComputerStore {
                 default:
                     System.out.println("Error");
                     displayMenu();
-                    continue;
             }
         }
 
@@ -114,7 +112,7 @@ public class ComputerStore {
             computerList[counter] = computer;
             counter++;
 
-            System.out.println("New computer Added");
+            System.out.println("**New computer Added**");
 
 
         }
@@ -132,10 +130,12 @@ public class ComputerStore {
 
             counterForPassword++;
             if (keyPassword.equals(password)) {
+                i=3;
                 System.out.println("Enter your Computer Number:");
                 int cmd = scan.nextInt();
                 //display information
-                displayCompInOption2(cmd);
+                int indexofarray = cmd -1;
+                displayCompInOption2(indexofarray);
                 // computer does not exist
                 if (flagOfNonExits ==1){
                     System.out.println("Option 1 : Enter new computer" );
@@ -144,9 +144,10 @@ public class ComputerStore {
                     int cmdNoExits = scan.nextInt();
 
                     if(cmdNoExits ==1){
-                        System.out.println("Enter your Computer Number:");
+                        System.out.println("Enter the Computer Number which you wanna change:");
                         cmd = scan.nextInt();
-                        displayCompInOption2(cmd);
+                        displayCompInOption2(indexofarray);
+                        flagOfNonExits = 0;
                     }
 
                     if(cmdNoExits == 2) {
@@ -154,11 +155,11 @@ public class ComputerStore {
                         continue;
                     }
                 }
-                    // computer exist
-                    if (flagOfNonExits ==0){
+                if(flagOfNonExits ==0 ){
                         printOp2Menu();
                         int option = scan.nextInt();
                         switchForChange(option,cmd);
+
                 }
 
 
@@ -181,9 +182,12 @@ public class ComputerStore {
 
             if (opt ==5){
                 System.out.println("**Quit**");
+                displayMenu();
                 break;
 
-            }            switch (opt) {
+            }
+
+            switch (opt) {
                 //Change brand
                 case 1:
                     System.out.println("Enter new Brand:");
@@ -191,44 +195,44 @@ public class ComputerStore {
                     computerList[ComputerIndex].setBrand(string);
                     System.out.print("Changed!\n" +
                             "new information for computer: " + ComputerIndex +"\n" +
-                                    "Changed Brand: " + computerList[ComputerIndex].getBrand()
+                                    "Changed Brand: " + computerList[ComputerIndex].getBrand() +"\n"
                             );
 
                     printOp2Menu();
-                    continue;
+
                 case 2:
                     System.out.println("Enter new Model:");
                     string = scanner.next();
                     computerList[ComputerIndex].setModel(string);
                     System.out.print("Changed!\n" +
                             "new information for computer: " + ComputerIndex +"\n" +
-                            "Changed Model: " + computerList[ComputerIndex].getModel()
+                            "Changed Model: " + computerList[ComputerIndex].getModel() +"\n"
                     );
 
                     printOp2Menu();
+                    break;
                 case 3:
                     System.out.println("Enter new SN:");
                     long SNNumber = scanner.nextLong();
                     computerList[ComputerIndex].setSN(SNNumber);
                     System.out.print("Changed!\n" +
                             "new information for computer: " + ComputerIndex +"\n" +
-                            "Changed Brand: " + computerList[ComputerIndex].getSN()
+                            "Changed SN: " + computerList[ComputerIndex].getSN() +"\n"
                     );
 
                     printOp2Menu();
-                    continue;
+                    break;
                 case 4:
-                    System.out.println("Enter new SN:");
+                    System.out.println("Enter new price:");
                     double price = scanner.nextDouble();
                     computerList[ComputerIndex].setPrice(price);
                     System.out.print("Changed!\n" +
                             "new information for computer: " + ComputerIndex +"\n" +
-                            "Changed Brand: " + computerList[ComputerIndex].getPrice()
+                            "Changed Price: " + computerList[ComputerIndex].getPrice()+"\n"
                     );
 
                     printOp2Menu();
-                    continue;
-
+                    break;
             }
         }
     }
@@ -237,7 +241,7 @@ public class ComputerStore {
             flagOfNonExits = 1;
             System.out.println("Error! Computer " + index + " does not exist!" );
         }else {
-            System.out.println("Computer #"+ index);
+            System.out.println("Computer #"+ (index+1));
             System.out.println("Brand: " + computerList[index].getBrand());
             System.out.println("Model: " + computerList[index].getModel());
             System.out.println("SN:" + computerList[index].getSN());
@@ -245,12 +249,12 @@ public class ComputerStore {
         }
     }
     public void printOp2Menu(){
-        System.out.println("What information you want to change?");
+        System.out.println(">>>What information you want to change?");
         System.out.print("1.Brand\n" +
                 "2.model\n" +
                 "3.SN\n" +
                 "4.price\n" +
-                "5.Quit"
+                "5.Quit\n"
         );
 
     }
