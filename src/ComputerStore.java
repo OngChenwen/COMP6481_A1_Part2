@@ -132,11 +132,11 @@ public class ComputerStore {
 
             counterForPassword++;
             if (keyPassword.equals(password)) {
-                printOp2Menu();
-                System.out.println("Enter your choice");
+                System.out.println("Enter your Computer Number:");
                 int cmd = scan.nextInt();
                 //display information
                 displayCompInOption2(cmd);
+                // computer does not exist
                 if (flagOfNonExits ==1){
                     System.out.println("Option 1 : Enter new computer" );
                     System.out.println("Option 2 : Go back to main menu");
@@ -144,10 +144,22 @@ public class ComputerStore {
                     int cmdNoExits = scan.nextInt();
 
                     if(cmdNoExits ==1){
-                        System.out.println();
+                        System.out.println("Enter your Computer Number:");
+                        cmd = scan.nextInt();
+                        displayCompInOption2(cmd);
+                    }
+
+                    if(cmdNoExits == 2) {
+                        displayMenu();
+                        continue;
                     }
                 }
-
+                    // computer exist
+                    if (flagOfNonExits ==0){
+                        printOp2Menu();
+                        int option = scan.nextInt();
+                        switchForChange(option,cmd);
+                }
 
 
 
@@ -157,15 +169,71 @@ public class ComputerStore {
                     System.out.println("Password entered limited!!");
                     System.out.println("                          ");
                     displayMenu();
-                    continue;
                 }
 
             }
         }
     }
+    public void switchForChange(int opt,int ComputerIndex) {
+        Scanner scanner = new Scanner(System.in);
+        String string="";
+        while (true) {
 
+            if (opt ==5){
+                System.out.println("**Quit**");
+                break;
+
+            }            switch (opt) {
+                //Change brand
+                case 1:
+                    System.out.println("Enter new Brand:");
+                    string = scanner.next();
+                    computerList[ComputerIndex].setBrand(string);
+                    System.out.print("Changed!\n" +
+                            "new information for computer: " + ComputerIndex +"\n" +
+                                    "Changed Brand: " + computerList[ComputerIndex].getBrand()
+                            );
+
+                    printOp2Menu();
+                    continue;
+                case 2:
+                    System.out.println("Enter new Model:");
+                    string = scanner.next();
+                    computerList[ComputerIndex].setModel(string);
+                    System.out.print("Changed!\n" +
+                            "new information for computer: " + ComputerIndex +"\n" +
+                            "Changed Model: " + computerList[ComputerIndex].getModel()
+                    );
+
+                    printOp2Menu();
+                case 3:
+                    System.out.println("Enter new SN:");
+                    long SNNumber = scanner.nextLong();
+                    computerList[ComputerIndex].setSN(SNNumber);
+                    System.out.print("Changed!\n" +
+                            "new information for computer: " + ComputerIndex +"\n" +
+                            "Changed Brand: " + computerList[ComputerIndex].getSN()
+                    );
+
+                    printOp2Menu();
+                    continue;
+                case 4:
+                    System.out.println("Enter new SN:");
+                    double price = scanner.nextDouble();
+                    computerList[ComputerIndex].setPrice(price);
+                    System.out.print("Changed!\n" +
+                            "new information for computer: " + ComputerIndex +"\n" +
+                            "Changed Brand: " + computerList[ComputerIndex].getPrice()
+                    );
+
+                    printOp2Menu();
+                    continue;
+
+            }
+        }
+    }
     public void displayCompInOption2(int index){
-        if(computerList[index] != null){
+        if(computerList[index] == null){
             flagOfNonExits = 1;
             System.out.println("Error! Computer " + index + " does not exist!" );
         }else {
