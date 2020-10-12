@@ -157,8 +157,7 @@ public class ComputerStore {
                 }
                 if(flagOfNonExits ==0 ){
                         printOp2Menu();
-                        int option = scan.nextInt();
-                        switchForChange(option,cmd);
+                        switchForChange(indexofarray);
 
                 }
 
@@ -175,11 +174,15 @@ public class ComputerStore {
             }
         }
     }
-    public void switchForChange(int opt,int ComputerIndex) {
+    public void switchForChange(int ComputerIndex) {
         Scanner scanner = new Scanner(System.in);
         String string="";
+        /* !!! when use Switch case inside while loop, the input scanner must
+               be defined inside while loop. Otherwise, the option for switch case will not be changed forever
+        */
         while (true) {
-
+            System.out.println(">>>>>>:");
+            int opt = scanner.nextInt();
             if (opt ==5){
                 System.out.println("**Quit**");
                 displayMenu();
@@ -189,7 +192,7 @@ public class ComputerStore {
 
             switch (opt) {
                 //Change brand
-                case 1:
+                    case 1:
                     System.out.println("Enter new Brand:");
                     string = scanner.next();
                     computerList[ComputerIndex].setBrand(string);
@@ -199,8 +202,9 @@ public class ComputerStore {
                             );
 
                     printOp2Menu();
+                    break;
 
-                case 2:
+                    case 2:
                     System.out.println("Enter new Model:");
                     string = scanner.next();
                     computerList[ComputerIndex].setModel(string);
@@ -211,7 +215,9 @@ public class ComputerStore {
 
                     printOp2Menu();
                     break;
-                case 3:
+
+
+                    case 3:
                     System.out.println("Enter new SN:");
                     long SNNumber = scanner.nextLong();
                     computerList[ComputerIndex].setSN(SNNumber);
@@ -222,7 +228,8 @@ public class ComputerStore {
 
                     printOp2Menu();
                     break;
-                case 4:
+
+                    case 4:
                     System.out.println("Enter new price:");
                     double price = scanner.nextDouble();
                     computerList[ComputerIndex].setPrice(price);
